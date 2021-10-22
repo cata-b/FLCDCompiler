@@ -1,0 +1,38 @@
+// fibonacci with user-entered start values and step count
+
+int x, y;
+uint n;
+
+print("Fibonacci sequence with parameters: \n");
+x = int(read("First value: "));
+y = int(read("Second value: "));
+n = uint(read("n (> 0) = "));
+
+if (n == 0)
+{
+	error("n should be > 0");
+	exit(-1);
+}
+	
+if (n == 1)
+{
+	print("Result: ", string(x));
+	exit(0);
+}
+	
+if (n == 2)
+{
+	print("Result: ", string(y));
+	exit(0);
+}
+
+while (n > 0)
+{
+	int z;
+	z = x + y;
+	x = y;
+	y = z;
+	n = n - 1;
+}
+
+print("Result: ", string(y), "\n");

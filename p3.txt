@@ -1,0 +1,62 @@
+// NIM game, computer always wins
+print("NIM | Try to beat me!\n");
+
+uint heapCount = uint(read("Number of heaps: "));
+uint maxHeapSize = uint(read("Max. heap size: "));
+uint heaps[heapCount];
+
+uint total = 0;
+for (uint i = 0; i < heapCount; i = i + 1)
+{
+	heaps[i] = uint(rand() * maxHeapSize);
+	total = total + heaps[i];
+}
+
+bool turn = false;
+
+while (total > 0)
+{
+	print("Heaps: ");
+	for (uint i = 0; i < heapCount; i = i + 1) {
+		print(string(i), ": ", string(heaps[i]))
+	}
+	print("\n");
+	
+	if (turn) {// computer's turn
+		print("My turn!\n");
+		uint xorSum = 0;
+		for (uint i = 0; i < heapCount; i = i + 1) {
+			xorSum = xorSum ^ heaps[i]; // ^ is bitwise xor
+		}
+		if (xorSum == 0) {
+			print("I choose to skip my turn :(\n");
+		}
+		uint choice, cid;
+		for (uint i = 0; i < heapCount; i = i + 1) {
+			if (xorSum ^ heaps[i] < heaps[i]) {
+				choice = heaps[i] - xorSum ^ heaps[i];
+				cid = i;
+				break;
+			}
+		}
+		print("I take ", string(choice), " from ", string(cid), "\n");
+		heaps[cid] = heaps[cid] - choice;
+		total = total - choice;
+	}
+	else {// player's turn
+		print("Your turn!\n");
+		uint id = read("Heap id: ");
+		uint count = read("How much to take from the heap: ");
+		if (id >= heapCount) {
+			print("Heap ", string(id), " Does not exist. You have lost your turn :)\n");
+			turn = !turn;
+			continue;
+		}
+		if (count > heaps[id]) {
+			print("Heap ", string(id), " Does not contain that many stones. You have lost your turn :)\n");
+		}
+		heaps[id] = heaps[id] - count;
+		total = total - count;
+	}
+}
+print("Win!\n");

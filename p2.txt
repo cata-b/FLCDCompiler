@@ -1,0 +1,8 @@
+// 99 Bottles of Beer
+for (uint bottle = 100; bottle > 1; bottle = bottle - 1)
+{
+	print(string(bottle), " bottles of beer on the wall, ", string(bottle), " bottles of beer\n");
+	print("Take one down and pass it around, ", string(bottle - 1), "bottles of beer on the wall\n");
+}
+print("1 bottle of beer on the wall, 1 bottle of beer\n");
+print("Take one down and pass it around, no bottles of beer on the wall\n");

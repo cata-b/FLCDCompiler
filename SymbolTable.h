@@ -29,6 +29,9 @@ public:
 
 		SymbolTable& symbolTable() const;
 
+		Position& operator=(const Position& other);
+		Position& operator=(Position&& other);
+
 		Position& operator++();
 		Position operator++(int);
 
@@ -38,6 +41,8 @@ public:
 		reference operator*() const;
 		pointer operator->() const;
 
+		size_t index() const;
+
 		friend class SymbolTable;
 	private:
 		struct Data
@@ -46,7 +51,6 @@ public:
 			Set<std::string>::Iterator iterator_;
 		};
 		Data* data_ = nullptr;
-		void update(SymbolTable* parent, Set<std::string>::Iterator iterator);
 	};
 
 	/// <summary> Inserts a symbol into the symbol table </summary>
@@ -64,9 +68,15 @@ public:
 	/// <returns>Position to the symbol or <see cref="end">end()</see> if it was not found</returns>
 	Position find(const std::string& symbol);
 
+	size_t size() const;
+
 	Position begin();
 	Position end();
+
+	~SymbolTable();
 private:
+	bool destructed_ = false;
+
 	Set<std::string> data_;
 	std::unordered_set<Position::Data*> positions_;
 

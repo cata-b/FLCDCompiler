@@ -1,0 +1,99 @@
+\hypertarget{class_symbol_table}{}\doxysubsection{Symbol\+Table Class Reference}
+\label{class_symbol_table}\index{SymbolTable@{SymbolTable}}
+
+
+Symbol table data structure. Features iterators that will sometimes get updated on insert, so that they are never invalid  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}}
+\begin{DoxyCompactList}\small\item\em Symbol table const iterator. Will still be valid after inserts in the parent \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}}, bool $>$ \mbox{\hyperlink{class_symbol_table_ab5a9e8dd36dfa53ba4197f41fc6bca5c}{insert}} (const std\+::string \&symbol)
+\begin{DoxyCompactList}\small\item\em Inserts a symbol into the symbol table \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \mbox{\hyperlink{class_symbol_table_a8246c429712bfbc81efbba94e2b3c952}{find}} (const std\+::string \&symbol)
+\begin{DoxyCompactList}\small\item\em Searches for an entry in the \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_symbol_table_a7dd8f22748bbe0d3e198071ec3291489}\label{class_symbol_table_a7dd8f22748bbe0d3e198071ec3291489}} 
+size\+\_\+t {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{class_symbol_table_aa52067b1ac3c15d3846e29e206fca2c7}\label{class_symbol_table_aa52067b1ac3c15d3846e29e206fca2c7}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} {\bfseries begin} ()
+\item 
+\mbox{\Hypertarget{class_symbol_table_a682d7377e22191a36859fdd7d119fa2c}\label{class_symbol_table_a682d7377e22191a36859fdd7d119fa2c}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} {\bfseries end} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_ab318367365aa16c2656863fe00631ad1}\label{class_symbol_table_ab318367365aa16c2656863fe00631ad1}} 
+void {\bfseries subscribe} (\mbox{\hyperlink{struct_symbol_table_1_1_position_1_1_data}{Position\+::\+Data}} $\ast$subscriber)
+\item 
+\mbox{\Hypertarget{class_symbol_table_ad21916c39927a7cbb4a7f62a7c9536f3}\label{class_symbol_table_ad21916c39927a7cbb4a7f62a7c9536f3}} 
+void {\bfseries unsubscribe} (\mbox{\hyperlink{struct_symbol_table_1_1_position_1_1_data}{Position\+::\+Data}} $\ast$subscriber)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_a68c06c3339a7f0f99b9053d3584c2036}\label{class_symbol_table_a68c06c3339a7f0f99b9053d3584c2036}} 
+bool {\bfseries destructed\+\_\+} = false
+\item 
+\mbox{\Hypertarget{class_symbol_table_a39221d21f25e6165deef72ca6a52e187}\label{class_symbol_table_a39221d21f25e6165deef72ca6a52e187}} 
+\mbox{\hyperlink{class_set}{Set}}$<$ std\+::string $>$ {\bfseries data\+\_\+}
+\item 
+\mbox{\Hypertarget{class_symbol_table_abb17a32a400a57ac4820ee4223e5d170}\label{class_symbol_table_abb17a32a400a57ac4820ee4223e5d170}} 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{struct_symbol_table_1_1_position_1_1_data}{Position\+::\+Data}} $\ast$ $>$ {\bfseries positions\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Symbol table data structure. Features iterators that will sometimes get updated on insert, so that they are never invalid 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_symbol_table_ab5a9e8dd36dfa53ba4197f41fc6bca5c}\label{class_symbol_table_ab5a9e8dd36dfa53ba4197f41fc6bca5c}} 
+\index{SymbolTable@{SymbolTable}!insert@{insert}}
+\index{insert@{insert}!SymbolTable@{SymbolTable}}
+\doxyparagraph{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily std\+::pair$<$ typename \mbox{\hyperlink{class_symbol_table_1_1_position}{Symbol\+Table\+::\+Position}}, bool $>$ Symbol\+Table\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption})}
+
+
+
+Inserts a symbol into the symbol table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symbol} & The symbol to insert\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} of where the symbol is and whether or not the insertion happened; if a similar symbol already exists in the table, the \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} points to that 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_symbol_table_a8246c429712bfbc81efbba94e2b3c952}\label{class_symbol_table_a8246c429712bfbc81efbba94e2b3c952}} 
+\index{SymbolTable@{SymbolTable}!find@{find}}
+\index{find@{find}!SymbolTable@{SymbolTable}}
+\doxyparagraph{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_symbol_table_1_1_position}{Symbol\+Table\+::\+Position}} Symbol\+Table\+::find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption})}
+
+
+
+Searches for an entry in the \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symbol} & The symbol to look for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} to the symbol or \mbox{\hyperlink{}{end()}} if it was not found
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Symbol\+Table.\+h\item 
+Symbol\+Table.\+cpp\end{DoxyCompactItemize}

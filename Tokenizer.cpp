@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <regex>
 
 
 using namespace std;
@@ -32,7 +33,7 @@ size_t countOccurrences(const char* str, char ch)
 	return count;
 };
 
-std::vector<Token> Tokenizer::tokenize(std::string filename)
+vector<Token> Tokenizer::tokenize(string filename)
 {
 	auto data = splitTokensFromSeparators(filename);
 	vector<Token> result;
@@ -42,7 +43,7 @@ std::vector<Token> Tokenizer::tokenize(std::string filename)
 				result.push_back(atom);
 		else
 			result.push_back(entry);
-	result = 
+	result =
 		removeWhitespaces(
 			combineStringLiterals(
 				removeComments(result)
@@ -51,14 +52,14 @@ std::vector<Token> Tokenizer::tokenize(std::string filename)
 	return result;
 }
 
-std::vector<Token> Tokenizer::splitTokensFromSeparators(std::string filename)
+vector<Token> Tokenizer::splitTokensFromSeparators(string filename)
 {
 	vector<Token> result;
 
 	FILE* inputFile;
 	errno_t err;
 	if ((err = fopen_s(&inputFile, filename.c_str(), "r")) != 0)
-		throw Error(string("Error while reading file: ") + strerror(err), Token{ string(""), 0 });
+		throw Error(string("Error while reading file: ") + strerror(err));
 	char buffer[BUFFER_SIZE + 1];
 	char bufferCopy[BUFFER_SIZE + 1];
 	size_t bufferOffset = 0;
@@ -66,7 +67,7 @@ std::vector<Token> Tokenizer::splitTokensFromSeparators(std::string filename)
 	size_t currentLine = 1;
 
 	size_t separatorsSize = 1 << 7;
-	std::unique_ptr<char> separators(new char[separatorsSize]);
+	unique_ptr<char> separators(new char[separatorsSize]);
 
 	auto resizeSeparators = [&separators, &separatorsSize](size_t requiredSize) {
 		if (requiredSize > separatorsSize)
@@ -111,6 +112,8 @@ std::vector<Token> Tokenizer::splitTokensFromSeparators(std::string filename)
 		if (token == NULL)
 		{
 			bufferOffset = 0;
+			if (sepStart < BUFFER_SIZE)
+				result.push_back(Token{ bufferCopy + sepStart, currentLine });
 			return;
 		}
 
@@ -143,7 +146,7 @@ std::vector<Token> Tokenizer::splitTokensFromSeparators(std::string filename)
 	}
 	if (bufferOffset > 0) // characters left in the buffer
 	{
-		amountRead = bufferOffset + 1;
+		amountRead = bufferOffset;
 
 		getTokensFromBuffer();
 	}
@@ -151,7 +154,7 @@ std::vector<Token> Tokenizer::splitTokensFromSeparators(std::string filename)
 	return result;
 }
 
-std::vector<Token> Tokenizer::splitSeparators(Token input)
+vector<Token> Tokenizer::splitSeparators(Token input)
 {
 	vector<Token> result;
 	size_t line = input.line - countOccurrences(input.content.c_str(), '\n');
@@ -188,7 +191,7 @@ std::vector<Token> Tokenizer::splitSeparators(Token input)
 	return result;
 }
 
-std::vector<Token> Tokenizer::removeComments(std::vector<Token> tokenized)
+vector<Token> Tokenizer::removeComments(vector<Token> tokenized)
 {
 	vector<Token> result;
 
@@ -213,7 +216,7 @@ std::vector<Token> Tokenizer::removeComments(std::vector<Token> tokenized)
 	return result;
 }
 
-std::vector<Token> Tokenizer::combineStringLiterals(std::vector<Token> tokenizedWithoutComments)
+vector<Token> Tokenizer::combineStringLiterals(vector<Token> tokenizedWithoutComments)
 {
 	vector<Token> result;
 	bool accumulatingString = false;
@@ -250,7 +253,7 @@ std::vector<Token> Tokenizer::combineStringLiterals(std::vector<Token> tokenized
 	return result;
 }
 
-std::vector<Token> Tokenizer::removeWhitespaces(std::vector<Token> tokenizedWithStringLiterals) 
+vector<Token> Tokenizer::removeWhitespaces(vector<Token> tokenizedWithStringLiterals)
 {
 	vector<Token> result;
 	for (auto&& entry : tokenizedWithStringLiterals)

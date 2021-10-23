@@ -1,0 +1,101 @@
+\hypertarget{class_set_1_1_iterator}{}\doxysubsection{Set$<$ Key\+Type, Hash, Equals $>$\+::Iterator Class Reference}
+\label{class_set_1_1_iterator}\index{Set$<$ KeyType, Hash, Equals $>$::Iterator@{Set$<$ KeyType, Hash, Equals $>$::Iterator}}
+
+
+Const iterator for a \mbox{\hyperlink{class_set}{Set}}. May become invalid/give errors after inserting data into the set; to check if an insertion would render the iterators invalid, use \mbox{\hyperlink{class_set_a77d226fcc783db130a6d963b88050f7f}{will\+Invalidate\+Iterators\+On\+Insert()}}  
+
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_aeb9105f2eacbb5bb7d792b79184451d2}\label{class_set_1_1_iterator_aeb9105f2eacbb5bb7d792b79184451d2}} 
+typedef std\+::input\+\_\+iterator\+\_\+tag {\bfseries iterator\+\_\+category}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a397a057cea554bb00b0df15cdc125554}\label{class_set_1_1_iterator_a397a057cea554bb00b0df15cdc125554}} 
+typedef Key\+Type {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a6f2ff68c5ac7a7c7ad730ac1f2999941}\label{class_set_1_1_iterator_a6f2ff68c5ac7a7c7ad730ac1f2999941}} 
+typedef std\+::ptrdiff\+\_\+t {\bfseries difference\+\_\+type}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_aff34b60f590eb82d48f89eeca7311727}\label{class_set_1_1_iterator_aff34b60f590eb82d48f89eeca7311727}} 
+{\bfseries Iterator} (const Key\+Type $\ast$data\+\_\+begin, const State $\ast$state\+\_\+begin, size\+\_\+t index, size\+\_\+t max)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a263871c7e1d388a000e05b3c1b7fda7f}\label{class_set_1_1_iterator_a263871c7e1d388a000e05b3c1b7fda7f}} 
+{\bfseries Iterator} (const \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \&other)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_ad99964f17d13cef64778aaa30b7bccec}\label{class_set_1_1_iterator_ad99964f17d13cef64778aaa30b7bccec}} 
+{\bfseries Iterator} (\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \&\&other)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_ab1138bd3a39b3450fc5b59237f11b1ff}\label{class_set_1_1_iterator_ab1138bd3a39b3450fc5b59237f11b1ff}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a4485950b9d88e422f70a76c69f1f47e4}\label{class_set_1_1_iterator_a4485950b9d88e422f70a76c69f1f47e4}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} {\bfseries operator++} (int)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a0d96088a8f799f5a74b9bf4b2336c8e0}\label{class_set_1_1_iterator_a0d96088a8f799f5a74b9bf4b2336c8e0}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \&other)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a327929233da47a5e5d1d7775d41c6a05}\label{class_set_1_1_iterator_a327929233da47a5e5d1d7775d41c6a05}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \& {\bfseries operator=} (\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \&\&other)
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a00ccc69db9ab5d899db87ea061557cf5}\label{class_set_1_1_iterator_a00ccc69db9ab5d899db87ea061557cf5}} 
+bool {\bfseries operator==} (\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} other) const
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a36543270fed07af3ca3b738958d484de}\label{class_set_1_1_iterator_a36543270fed07af3ca3b738958d484de}} 
+bool {\bfseries operator!=} (\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} other) const
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_ade999334889a1acec08ff41a2d9493b1}\label{class_set_1_1_iterator_ade999334889a1acec08ff41a2d9493b1}} 
+const reference {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a94d934ade7ed3ff18be002e83eea24b8}\label{class_set_1_1_iterator_a94d934ade7ed3ff18be002e83eea24b8}} 
+const pointer {\bfseries operator-\/$>$} () const
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_aa0532f30f1aa0c98a22cf48646f78c9e}\label{class_set_1_1_iterator_aa0532f30f1aa0c98a22cf48646f78c9e}} 
+size\+\_\+t {\bfseries index} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_ab13111b0b36d9eb02ad6d98478329652}\label{class_set_1_1_iterator_ab13111b0b36d9eb02ad6d98478329652}} 
+const typedef Key\+Type $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a765f5f005d7f150e48e0d2096dc7612a}\label{class_set_1_1_iterator_a765f5f005d7f150e48e0d2096dc7612a}} 
+const typedef Key\+Type \& {\bfseries reference}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a1dd854a77d3f5a4b93cc031baa378095}\label{class_set_1_1_iterator_a1dd854a77d3f5a4b93cc031baa378095}} 
+const Key\+Type $\ast$ {\bfseries data\+\_\+begin\+\_\+}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a11c041aa1177b31afea4855f7dac1df2}\label{class_set_1_1_iterator_a11c041aa1177b31afea4855f7dac1df2}} 
+const State $\ast$ {\bfseries state\+\_\+begin\+\_\+}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a3d8132c34da435924a36037dc99a769f}\label{class_set_1_1_iterator_a3d8132c34da435924a36037dc99a769f}} 
+size\+\_\+t {\bfseries index\+\_\+}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_ab1e30f1572283328c5f1b9a3d1f74b17}\label{class_set_1_1_iterator_ab1e30f1572283328c5f1b9a3d1f74b17}} 
+size\+\_\+t {\bfseries max\+\_\+}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_1_1_iterator_a85f04e9516b9eac3a6bee506abd0d30a}\label{class_set_1_1_iterator_a85f04e9516b9eac3a6bee506abd0d30a}} 
+class {\bfseries Set}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\subsubsection*{template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$\newline
+class Set$<$ Key\+Type, Hash, Equals $>$\+::\+Iterator}
+
+Const iterator for a \mbox{\hyperlink{class_set}{Set}}. May become invalid/give errors after inserting data into the set; to check if an insertion would render the iterators invalid, use \mbox{\hyperlink{class_set_a77d226fcc783db130a6d963b88050f7f}{will\+Invalidate\+Iterators\+On\+Insert()}} 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Set.\+hpp\end{DoxyCompactItemize}

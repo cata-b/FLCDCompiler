@@ -1,0 +1,14 @@
+0 "n (> 0) = "
+1 n
+2 "Fibonacci sequence with parameters: \n"
+3 "n should be > 0"
+4 y
+5 1
+6 "Result: "
+7 x
+8 "First value: "
+9 2
+10 "\n"
+12 "Second value: "
+13 z
+15 0

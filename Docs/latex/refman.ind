@@ -1,0 +1,92 @@
+\begin{theindex}
+
+  \item {Analyze}
+    \subitem {LexicalAnalyzer}, \hyperpage{2}
+
+  \indexspace
+
+  \item {capacity}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+  \item {combineStringLiterals}
+    \subitem {Tokenizer}, \hyperpage{13}
+
+  \indexspace
+
+  \item {erase}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+
+  \indexspace
+
+  \item {find}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{5}
+    \subitem {SymbolTable}, \hyperpage{9}
+  \item {firstEmpty\_}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+
+  \indexspace
+
+  \item {insert}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{5}
+    \subitem {SymbolTable}, \hyperpage{9}
+
+  \indexspace
+
+  \item {LexicalAnalyzer}, \hyperpage{1}
+    \subitem {Analyze}, \hyperpage{2}
+    \subitem {TOKEN\_CLASSES}, \hyperpage{2}
+
+  \indexspace
+
+  \item {next\_}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+
+  \indexspace
+
+  \item {removeComments}
+    \subitem {Tokenizer}, \hyperpage{12}
+  \item {removeWhitespaces}
+    \subitem {Tokenizer}, \hyperpage{13}
+
+  \indexspace
+
+  \item {Set}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{4}
+  \item {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{2}
+    \subitem {capacity}, \hyperpage{6}
+    \subitem {erase}, \hyperpage{6}
+    \subitem {find}, \hyperpage{5}
+    \subitem {firstEmpty\_}, \hyperpage{6}
+    \subitem {insert}, \hyperpage{5}
+    \subitem {next\_}, \hyperpage{6}
+    \subitem {Set}, \hyperpage{4}
+    \subitem {size\_}, \hyperpage{6}
+  \item {Set$<$ KeyType, Hash, Equals $>$::Iterator}, \hyperpage{7}
+  \item {size\_}
+    \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+  \item {splitSeparators}
+    \subitem {Tokenizer}, \hyperpage{12}
+  \item {splitTokensFromSeparators}
+    \subitem {Tokenizer}, \hyperpage{12}
+  \item {SymbolTable}, \hyperpage{8}
+    \subitem {find}, \hyperpage{9}
+    \subitem {insert}, \hyperpage{9}
+  \item {SymbolTable::Position}, \hyperpage{9}
+  \item {SymbolTable::Position::Data}, \hyperpage{11}
+
+  \indexspace
+
+  \item {Token}, \hyperpage{11}
+  \item {TOKEN\_CLASSES}
+    \subitem {LexicalAnalyzer}, \hyperpage{2}
+  \item {tokenize}
+    \subitem {Tokenizer}, \hyperpage{11}
+  \item {Tokenizer}, \hyperpage{11}
+    \subitem {combineStringLiterals}, \hyperpage{13}
+    \subitem {removeComments}, \hyperpage{12}
+    \subitem {removeWhitespaces}, \hyperpage{13}
+    \subitem {splitSeparators}, \hyperpage{12}
+    \subitem {splitTokensFromSeparators}, \hyperpage{12}
+    \subitem {tokenize}, \hyperpage{11}
+  \item {Tokenizer::Error}, \hyperpage{14}
+
+\end{theindex}

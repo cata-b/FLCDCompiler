@@ -1,0 +1,84 @@
+\hypertarget{class_lexical_analyzer}{}\doxysubsection{Lexical\+Analyzer Class Reference}
+\label{class_lexical_analyzer}\index{LexicalAnalyzer@{LexicalAnalyzer}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_lexical_analyzer_ad19a67b7539f4963785649f2487b8c1b}\label{class_lexical_analyzer_ad19a67b7539f4963785649f2487b8c1b}} 
+enum {\bfseries Token\+Type} \{ \newline
+{\bfseries K\+E\+Y\+W\+O\+RD}, 
+{\bfseries C\+O\+N\+S\+T\+A\+NT}, 
+{\bfseries O\+P\+E\+R\+A\+T\+OR}, 
+{\bfseries S\+E\+P\+A\+R\+A\+T\+OR}, 
+\newline
+{\bfseries I\+D\+E\+N\+T\+I\+F\+I\+ER}, 
+{\bfseries E\+R\+R\+OR}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_lexical_analyzer_a977b5138891ccfc27c13b25da75a1502}{Analyze}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokens, \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} \&symbol\+Table, std\+::vector$<$ std\+::tuple$<$ \mbox{\hyperlink{struct_token}{Token}}, Token\+Type, \mbox{\hyperlink{class_symbol_table_1_1_position}{Symbol\+Table\+::\+Position}} $>$$>$ \&pif)
+\begin{DoxyCompactList}\small\item\em Analyzes and classifies tokens \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::vector$<$ std\+::pair$<$ std\+::regex, Token\+Type $>$ $>$ \mbox{\hyperlink{class_lexical_analyzer_abe43ce26b5edc1bcdbcdca7cc98a7cd9}{T\+O\+K\+E\+N\+\_\+\+C\+L\+A\+S\+S\+ES}}
+\begin{DoxyCompactList}\small\item\em Maps a regular expression to a token type; the order of the elements is such that, if checking in order, tokens that would match more entries will match the correct entry (e.\+g. true will be classified as a constant, rather than an identifier) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_lexical_analyzer_a977b5138891ccfc27c13b25da75a1502}\label{class_lexical_analyzer_a977b5138891ccfc27c13b25da75a1502}} 
+\index{LexicalAnalyzer@{LexicalAnalyzer}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!LexicalAnalyzer@{LexicalAnalyzer}}
+\doxyparagraph{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Lexical\+Analyzer\+::\+Analyze (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$}]{tokens,  }\item[{\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} \&}]{symbol\+Table,  }\item[{std\+::vector$<$ std\+::tuple$<$ \mbox{\hyperlink{struct_token}{Token}}, Token\+Type, \mbox{\hyperlink{class_symbol_table_1_1_position}{Symbol\+Table\+::\+Position}} $>$$>$ \&}]{pif }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Analyzes and classifies tokens 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & Tokens, as returned by \mbox{\hyperlink{class_tokenizer_af782f408c94bbb150c2721430e1997bc}{Tokenizer\+::tokenize}}\\
+\hline
+{\em symbol\+Table} & Output parameter that will contain all the identifiers and constants from the tokens\\
+\hline
+{\em pif} & Output parameter that will contain tokens, their type, and their positions in the symbol table (if a token is not inserted in the symbol table, the position is the \mbox{\hyperlink{}{end}} of that table)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All the tokens that could not be classified
+\end{DoxyReturn}
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_lexical_analyzer_abe43ce26b5edc1bcdbcdca7cc98a7cd9}\label{class_lexical_analyzer_abe43ce26b5edc1bcdbcdca7cc98a7cd9}} 
+\index{LexicalAnalyzer@{LexicalAnalyzer}!TOKEN\_CLASSES@{TOKEN\_CLASSES}}
+\index{TOKEN\_CLASSES@{TOKEN\_CLASSES}!LexicalAnalyzer@{LexicalAnalyzer}}
+\doxyparagraph{\texorpdfstring{TOKEN\_CLASSES}{TOKEN\_CLASSES}}
+{\footnotesize\ttfamily const vector$<$ pair$<$ regex, Lexical\+Analyzer\+::\+Token\+Type $>$ $>$ Lexical\+Analyzer\+::\+T\+O\+K\+E\+N\+\_\+\+C\+L\+A\+S\+S\+ES\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{ regex(R\textcolor{stringliteral}{"(int|uint|bool|string|read|print|error|rand|exit|for|while|if|else|break|continue)"), TokenType::KEYWORD \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"((?:[1-\/9]+[0-\/9]*)|0)"), TokenType::CONSTANT \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"((:?\(\backslash\)+|\(\backslash\)-\/)[1-\/9]+[0-\/9]*)"), TokenType::CONSTANT \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"(true|false)"), TokenType::CONSTANT \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"(\(\backslash\)"[a-\/zA-\/Z0-\/9\(\backslash\)+\(\backslash\)-\/*/\%\(\backslash\)\(\backslash\)=<>[\(\backslash\)]\{\}()?!\_.|\&*\string^",':; \(\backslash\)t]*\(\backslash\)")"), TokenType::CONSTANT \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"(==|!=|>=|<=|\(\backslash\)|\(\backslash\)||\&\&|\(\backslash\)+|-\/|\(\backslash\)*|\(\backslash\)/|\%|=|<|>|\(\backslash\)\string^|\(\backslash\)||\&|!)"), TokenType::OPERATOR \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"(\(\backslash\)(|\(\backslash\))|\(\backslash\)\{|\(\backslash\)\}|\(\backslash\)[|\(\backslash\)]|,|'|:|;)"), TokenType::SEPARATOR \},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    \{ regex(R}\textcolor{stringliteral}{"([a-\/zA-\/Z\_]+[a-\/zA-\/Z0-\/9\_]*)"), TokenType::IDENTIFIER \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}}}
+
+\end{DoxyCode}
+
+
+Maps a regular expression to a token type; the order of the elements is such that, if checking in order, tokens that would match more entries will match the correct entry (e.\+g. true will be classified as a constant, rather than an identifier) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Lexical\+Analyzer.\+h\item 
+Lexical\+Analyzer.\+cpp\end{DoxyCompactItemize}

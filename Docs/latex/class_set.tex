@@ -1,0 +1,284 @@
+\hypertarget{class_set}{}\doxysubsection{Set$<$ Key\+Type, Hash, Equals $>$ Class Template Reference}
+\label{class_set}\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+
+
+Hashtable with coalesced chaining  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}
+\begin{DoxyCompactList}\small\item\em Const iterator for a \mbox{\hyperlink{class_set}{Set}}. May become invalid/give errors after inserting data into the set; to check if an insertion would render the iterators invalid, use \mbox{\hyperlink{class_set_a77d226fcc783db130a6d963b88050f7f}{will\+Invalidate\+Iterators\+On\+Insert()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_a0314ff4225834133ee7a3532a86bf3c6}\label{class_set_a0314ff4225834133ee7a3532a86bf3c6}} 
+typedef \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} {\bfseries const\+\_\+iterator\+\_\+type}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_set_ae4dbbc3ede8f9b1fc020700b23e89463}{Set}} ()
+\begin{DoxyCompactList}\small\item\em Initializes an empty \mbox{\hyperlink{class_set}{Set}} with initial capacity 1 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_set_a7dc5d6bf525a21c9bdec30be59ac2c8d}{Set}} (size\+\_\+t initial\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Initializes an empty \mbox{\hyperlink{class_set}{Set}} with a custom initial capacity \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ \mbox{\hyperlink{class_set_a71680041f911042bd7a2595225134590}{insert}} (const Key\+Type \&item)
+\begin{DoxyCompactList}\small\item\em Inserts a copy of an item into the set \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ \mbox{\hyperlink{class_set_a0036fb9ff5e5e7efba2f5de65ec63a46}{insert}} (Key\+Type \&\&item)
+\begin{DoxyCompactList}\small\item\em Inserts an item into the set \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \mbox{\hyperlink{class_set_ab7d99f409678044667987d1459c66ff2}{find}} (const Key\+Type \&item) const
+\begin{DoxyCompactList}\small\item\em Searches for an item in the set \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_set_a6daf2d970ae0accd45f54e43e1826acd}{erase}} (\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} iterator)
+\begin{DoxyCompactList}\small\item\em Removes the item at an iterator \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_set_a0432f9ae7fdcbce05a94e16153d3084d}\label{class_set_a0432f9ae7fdcbce05a94e16153d3084d}} 
+size\+\_\+t \mbox{\hyperlink{class_set_a0432f9ae7fdcbce05a94e16153d3084d}{size}} () const
+\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
+The number of items in the set
+\end{DoxyReturn}
+\end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_set_a371a5eb35ad912be466854094c710e27}{capacity}} () const
+\item 
+\mbox{\Hypertarget{class_set_a77d226fcc783db130a6d963b88050f7f}\label{class_set_a77d226fcc783db130a6d963b88050f7f}} 
+bool \mbox{\hyperlink{class_set_a77d226fcc783db130a6d963b88050f7f}{will\+Invalidate\+Iterators\+On\+Insert}} () const
+\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
+true if the next insert would trigger a resize, therefore invalidating the iterators
+\end{DoxyReturn}
+\end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_set_a9412011b92c37e0f0174e4fd7c1aa1d6}\label{class_set_a9412011b92c37e0f0174e4fd7c1aa1d6}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{class_set_a4cb0d100e728542fb7bbf661eed6c62b}\label{class_set_a4cb0d100e728542fb7bbf661eed6c62b}} 
+\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} {\bfseries end} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_a56dbb56f918489d8dcf9e0f0ba2cc3b8}\label{class_set_a56dbb56f918489d8dcf9e0f0ba2cc3b8}} 
+enum {\bfseries State} \{ {\bfseries E\+M\+P\+TY}, 
+{\bfseries O\+C\+C\+U\+P\+I\+ED}, 
+{\bfseries D\+E\+L\+E\+T\+ED}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_set_a21ae36da8f6551baaaccbb56abb19d35}\label{class_set_a21ae36da8f6551baaaccbb56abb19d35}} 
+void {\bfseries resize} (size\+\_\+t new\+Capacity)
+\item 
+\mbox{\Hypertarget{class_set_a51844c5717dd603eba56b8139740c00e}\label{class_set_a51844c5717dd603eba56b8139740c00e}} 
+{\footnotesize template$<$typename ref\+Type $>$ }\\std\+::pair$<$ \mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ {\bfseries insert\+\_\+} (ref\+Type item)
+\item 
+\mbox{\Hypertarget{class_set_a9af083c49a3062536f9fd00cc8b33f84}\label{class_set_a9af083c49a3062536f9fd00cc8b33f84}} 
+{\footnotesize template$<$typename ref\+Type $>$ }\\std\+::pair$<$ typename \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ {\bfseries insert\+\_\+} (ref\+Type item)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int $\ast$ \mbox{\hyperlink{class_set_a98e0b6e26a85739650ed57ab24030cc8}{next\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Array of positions -- each element points to the next one in the \char`\"{}bucket\char`\"{} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_set_adc3dddce7145b1731e4c4132783472fa}\label{class_set_adc3dddce7145b1731e4c4132783472fa}} 
+Key\+Type $\ast$ {\bfseries data\+\_\+}
+\item 
+int64\+\_\+t \mbox{\hyperlink{class_set_a7b57a15bd54c7789faf16724d2e05817}{first\+Empty\+\_\+}}
+\begin{DoxyCompactList}\small\item\em First empty (not deleted) position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_set_a1067e011d5f66f1219aedc8fa9850a37}\label{class_set_a1067e011d5f66f1219aedc8fa9850a37}} 
+State $\ast$ {\bfseries state\+\_\+}
+\item 
+size\+\_\+t \mbox{\hyperlink{class_set_ac376801856062bf627ffb0e10484a7be}{size\+\_\+}}
+\begin{DoxyCompactList}\small\item\em The number of 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{State::OCCUPIED}
+\end{DoxyCode}
+ cells \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_set_a60c81da319904f5429b0a77555a02a84}\label{class_set_a60c81da319904f5429b0a77555a02a84}} 
+size\+\_\+t {\bfseries capacity\+\_\+}
+\item 
+\mbox{\Hypertarget{class_set_af76f509b5b78dcba6b25c2a19c585dac}\label{class_set_af76f509b5b78dcba6b25c2a19c585dac}} 
+Hash {\bfseries hash\+\_\+}
+\item 
+\mbox{\Hypertarget{class_set_a4ed9aac3b51fe2d3e393012252ffa628}\label{class_set_a4ed9aac3b51fe2d3e393012252ffa628}} 
+Equals {\bfseries equals\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\subsubsection*{template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$\newline
+class Set$<$ Key\+Type, Hash, Equals $>$}
+
+Hashtable with coalesced chaining 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Key\+Type} & The type of the items held in this set\\
+\hline
+{\em Hash} & Hashing functor for an item of type Key\+Type\\
+\hline
+{\em Equals} & Equality functor for an item of type Key\+Type\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_set_ae4dbbc3ede8f9b1fc020700b23e89463}\label{class_set_ae4dbbc3ede8f9b1fc020700b23e89463}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!Set@{Set}}
+\index{Set@{Set}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$ \\
+\mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set}{Set}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes an empty \mbox{\hyperlink{class_set}{Set}} with initial capacity 1 
+
+\mbox{\Hypertarget{class_set_a7dc5d6bf525a21c9bdec30be59ac2c8d}\label{class_set_a7dc5d6bf525a21c9bdec30be59ac2c8d}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!Set@{Set}}
+\index{Set@{Set}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key\+Type , class Hash , class Equals $>$ \\
+\mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set}{Set}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{initial\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Initializes an empty \mbox{\hyperlink{class_set}{Set}} with a custom initial capacity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+size} & The initial capacity \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_set_a71680041f911042bd7a2595225134590}\label{class_set_a71680041f911042bd7a2595225134590}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!insert@{insert}}
+\index{insert@{insert}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash , class Equals $>$ \\
+std\+::pair$<$ typename \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::insert (\begin{DoxyParamCaption}\item[{const Key\+Type \&}]{item }\end{DoxyParamCaption})}
+
+
+
+Inserts a copy of an item into the set 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to insert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to an item equal to the parameter and whether the insertion happened (true) or a similar item was already in the set (false) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_set_a0036fb9ff5e5e7efba2f5de65ec63a46}\label{class_set_a0036fb9ff5e5e7efba2f5de65ec63a46}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!insert@{insert}}
+\index{insert@{insert}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash , class Equals $>$ \\
+std\+::pair$<$ typename \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}, bool $>$ \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::insert (\begin{DoxyParamCaption}\item[{Key\+Type \&\&}]{item }\end{DoxyParamCaption})}
+
+
+
+Inserts an item into the set 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to insert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to an item equal to the parameter and whether the insertion happened (true) or a similar item was already in the set (false) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_set_ab7d99f409678044667987d1459c66ff2}\label{class_set_ab7d99f409678044667987d1459c66ff2}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!find@{find}}
+\index{find@{find}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash , class Equals $>$ \\
+\mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}} \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::find (\begin{DoxyParamCaption}\item[{const Key\+Type \&}]{item }\end{DoxyParamCaption}) const}
+
+
+
+Searches for an item in the set 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to search for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to the similar item in the set or \mbox{\hyperlink{}{end()}}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_set_a6daf2d970ae0accd45f54e43e1826acd}\label{class_set_a6daf2d970ae0accd45f54e43e1826acd}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!erase@{erase}}
+\index{erase@{erase}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily template$<$class Key\+Type , class Hash , class Equals $>$ \\
+void \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_set_1_1_iterator}{Iterator}}}]{iterator }\end{DoxyParamCaption})}
+
+
+
+Removes the item at an iterator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & The position of the item to remove\\
+\hline
+\end{DoxyParams}
+
+
+Throws std\+::runtime\+\_\+error if the iterator points outside the container (e.\+g. is equal to end())\mbox{\Hypertarget{class_set_a371a5eb35ad912be466854094c710e27}\label{class_set_a371a5eb35ad912be466854094c710e27}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The capacity of the set
+\end{DoxyReturn}
+
+
+The number of insertions (without subtracting deletions) is compared with the capacity when resizing
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_set_a98e0b6e26a85739650ed57ab24030cc8}\label{class_set_a98e0b6e26a85739650ed57ab24030cc8}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!next\_@{next\_}}
+\index{next\_@{next\_}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{next\_}{next\_}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$ \\
+int$\ast$ \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::next\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Array of positions -- each element points to the next one in the \char`\"{}bucket\char`\"{} 
+
+\mbox{\Hypertarget{class_set_a7b57a15bd54c7789faf16724d2e05817}\label{class_set_a7b57a15bd54c7789faf16724d2e05817}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!firstEmpty\_@{firstEmpty\_}}
+\index{firstEmpty\_@{firstEmpty\_}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{firstEmpty\_}{firstEmpty\_}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$ \\
+int64\+\_\+t \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::first\+Empty\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+First empty (not deleted) position 
+
+\mbox{\Hypertarget{class_set_ac376801856062bf627ffb0e10484a7be}\label{class_set_ac376801856062bf627ffb0e10484a7be}} 
+\index{Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!Set$<$ KeyType, Hash, Equals $>$@{Set$<$ KeyType, Hash, Equals $>$}}
+\doxyparagraph{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily template$<$class Key\+Type, class Hash = std\+::hash$<$\+Key\+Type$>$, class Equals = std\+::equal\+\_\+to$<$\+Key\+Type$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{class_set}{Set}}$<$ Key\+Type, Hash, Equals $>$\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The number of 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{State::OCCUPIED}
+\end{DoxyCode}
+ cells 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Set.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,98 @@
+\hypertarget{class_symbol_table_1_1_position}{}\doxysubsection{Symbol\+Table\+::Position Class Reference}
+\label{class_symbol_table_1_1_position}\index{SymbolTable::Position@{SymbolTable::Position}}
+
+
+Symbol table const iterator. Will still be valid after inserts in the parent \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}}  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_symbol_table_1_1_position_1_1_data}{Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_ab3239c2223d4602180aa9a899613a35e}\label{class_symbol_table_1_1_position_ab3239c2223d4602180aa9a899613a35e}} 
+typedef std\+::input\+\_\+iterator\+\_\+tag {\bfseries iterator\+\_\+category}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a046bd1a411c623eb98d2140abc5ef405}\label{class_symbol_table_1_1_position_a046bd1a411c623eb98d2140abc5ef405}} 
+typedef std\+::ptrdiff\+\_\+t {\bfseries difference\+\_\+type}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_ae4da634e34bbabf4b7c8f9556f1c26c5}\label{class_symbol_table_1_1_position_ae4da634e34bbabf4b7c8f9556f1c26c5}} 
+{\bfseries Position} (\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \&\&other)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_aec2967e531f31dc01cbb59893725e877}\label{class_symbol_table_1_1_position_aec2967e531f31dc01cbb59893725e877}} 
+{\bfseries Position} (const \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \&other)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a40cb88c83cb1b6f95ecf8647bad84445}\label{class_symbol_table_1_1_position_a40cb88c83cb1b6f95ecf8647bad84445}} 
+{\bfseries Position} (\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} $\ast$parent, \mbox{\hyperlink{class_set}{Set}}$<$ std\+::string $>$\+::Iterator iterator)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a234ba35e41c99f49a65f027ddd96290a}\label{class_symbol_table_1_1_position_a234ba35e41c99f49a65f027ddd96290a}} 
+\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} \& {\bfseries symbol\+Table} () const
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a170645e1feced10bd81884eace22a971}\label{class_symbol_table_1_1_position_a170645e1feced10bd81884eace22a971}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \&other)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a7021bd26b040e65973d2e166f48afdb3}\label{class_symbol_table_1_1_position_a7021bd26b040e65973d2e166f48afdb3}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \& {\bfseries operator=} (\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \&\&other)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_abff709e4a9765ff247e9dbaaf3a128fc}\label{class_symbol_table_1_1_position_abff709e4a9765ff247e9dbaaf3a128fc}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a2eabb1b74dc741517cd0321dba10ab7b}\label{class_symbol_table_1_1_position_a2eabb1b74dc741517cd0321dba10ab7b}} 
+\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} {\bfseries operator++} (int)
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a58c1afb56d6d7f9e039107fefec1cb37}\label{class_symbol_table_1_1_position_a58c1afb56d6d7f9e039107fefec1cb37}} 
+bool {\bfseries operator==} (\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} other) const
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a54f1ac318f2ae72094056ba313bd3ee2}\label{class_symbol_table_1_1_position_a54f1ac318f2ae72094056ba313bd3ee2}} 
+bool {\bfseries operator!=} (\mbox{\hyperlink{class_symbol_table_1_1_position}{Position}} other) const
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_aa67883ef4dba8391185edb672c498eaf}\label{class_symbol_table_1_1_position_aa67883ef4dba8391185edb672c498eaf}} 
+reference {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a44554e05eb8c6cbeedd443a0e5b95717}\label{class_symbol_table_1_1_position_a44554e05eb8c6cbeedd443a0e5b95717}} 
+pointer {\bfseries operator-\/$>$} () const
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a30816eb0ddfb887a839ed1baed4fb868}\label{class_symbol_table_1_1_position_a30816eb0ddfb887a839ed1baed4fb868}} 
+size\+\_\+t {\bfseries index} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_addfee99895cf1bd37769502329301215}\label{class_symbol_table_1_1_position_addfee99895cf1bd37769502329301215}} 
+const typedef std\+::string {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a21bf74ce4bed86c10bef9eb7a39e5d82}\label{class_symbol_table_1_1_position_a21bf74ce4bed86c10bef9eb7a39e5d82}} 
+const typedef std\+::string $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_ae09bfab667c06a30b92a025a131c924e}\label{class_symbol_table_1_1_position_ae09bfab667c06a30b92a025a131c924e}} 
+const typedef std\+::string \& {\bfseries reference}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_a0c63a111f173c4e85b18c40baf03bf7e}\label{class_symbol_table_1_1_position_a0c63a111f173c4e85b18c40baf03bf7e}} 
+\mbox{\hyperlink{struct_symbol_table_1_1_position_1_1_data}{Data}} $\ast$ {\bfseries data\+\_\+} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_symbol_table_1_1_position_ac1b80bc52166901e909169b2657de45f}\label{class_symbol_table_1_1_position_ac1b80bc52166901e909169b2657de45f}} 
+class {\bfseries Symbol\+Table}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Symbol table const iterator. Will still be valid after inserts in the parent \mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Symbol\+Table.\+h\item 
+Symbol\+Table.\+cpp\end{DoxyCompactItemize}

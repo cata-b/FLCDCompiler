@@ -1,0 +1,154 @@
+\hypertarget{class_tokenizer}{}\doxysubsection{Tokenizer Class Reference}
+\label{class_tokenizer}\index{Tokenizer@{Tokenizer}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_tokenizer_1_1_error}{Error}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_af782f408c94bbb150c2721430e1997bc}{tokenize}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Reads input from a file and splits it into tokens \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a12548bb1002907630f727828baf2cf05}{split\+Tokens\+From\+Separators}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Reads a file and (partially) splits it into tokens \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a56ebbc02c2916516b0a72945516fc281}{split\+Separators}} (\mbox{\hyperlink{struct_token}{Token}} input)
+\begin{DoxyCompactList}\small\item\em Splits the strings that are made of separators into individual tokens \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a8698b6577a32ae8e9d97b9544312809d}{remove\+Comments}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+With\+Split\+Separators)
+\begin{DoxyCompactList}\small\item\em Removes sequences of tokens that begin with \textquotesingle{}//\textquotesingle{} and end with \textquotesingle{}~\newline
+\textquotesingle{} \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a48073508160e45a6dc66b03616c2a968}{combine\+String\+Literals}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+Without\+Comments)
+\begin{DoxyCompactList}\small\item\em Combines token sequences that are on a single line and begin and end with " \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_af97cfd054ffae20c251825095f01fc44}{remove\+Whitespaces}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+With\+String\+Literals)
+\begin{DoxyCompactList}\small\item\em Removes entries that are whitespaces \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tokenizer_af782f408c94bbb150c2721430e1997bc}\label{class_tokenizer_af782f408c94bbb150c2721430e1997bc}} 
+\index{Tokenizer@{Tokenizer}!tokenize@{tokenize}}
+\index{tokenize@{tokenize}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{tokenize()}{tokenize()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::tokenize (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads input from a file and splits it into tokens 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to read\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_tokenizer_1_1_error}{Error}}} & Thrown when the tokenizer cannot read a file or cannot split the content into tokens correctly\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A vector of tokens
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_a12548bb1002907630f727828baf2cf05}\label{class_tokenizer_a12548bb1002907630f727828baf2cf05}} 
+\index{Tokenizer@{Tokenizer}!splitTokensFromSeparators@{splitTokensFromSeparators}}
+\index{splitTokensFromSeparators@{splitTokensFromSeparators}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{splitTokensFromSeparators()}{splitTokensFromSeparators()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::split\+Tokens\+From\+Separators (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Reads a file and (partially) splits it into tokens 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tokens that may be either strings of separators or strings of not separators
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_a56ebbc02c2916516b0a72945516fc281}\label{class_tokenizer_a56ebbc02c2916516b0a72945516fc281}} 
+\index{Tokenizer@{Tokenizer}!splitSeparators@{splitSeparators}}
+\index{splitSeparators@{splitSeparators}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{splitSeparators()}{splitSeparators()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::split\+Separators (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_token}{Token}}}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Splits the strings that are made of separators into individual tokens 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \mbox{\hyperlink{struct_token}{Token}} returned by \mbox{\hyperlink{class_tokenizer_a12548bb1002907630f727828baf2cf05}{split\+Tokens\+From\+Separators}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tokens where all separators are a separate token (taking into account 2-\/character operators, e.\+g. $>$=)
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_a8698b6577a32ae8e9d97b9544312809d}\label{class_tokenizer_a8698b6577a32ae8e9d97b9544312809d}} 
+\index{Tokenizer@{Tokenizer}!removeComments@{removeComments}}
+\index{removeComments@{removeComments}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{removeComments()}{removeComments()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::remove\+Comments (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$}]{tokenized\+With\+Split\+Separators }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Removes sequences of tokens that begin with \textquotesingle{}//\textquotesingle{} and end with \textquotesingle{}~\newline
+\textquotesingle{} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokenized\+With\+Split\+Separators} & Output of \mbox{\hyperlink{class_tokenizer_a56ebbc02c2916516b0a72945516fc281}{split\+Separators}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The modified tokens
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_a48073508160e45a6dc66b03616c2a968}\label{class_tokenizer_a48073508160e45a6dc66b03616c2a968}} 
+\index{Tokenizer@{Tokenizer}!combineStringLiterals@{combineStringLiterals}}
+\index{combineStringLiterals@{combineStringLiterals}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{combineStringLiterals()}{combineStringLiterals()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::combine\+String\+Literals (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$}]{tokenized\+Without\+Comments }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Combines token sequences that are on a single line and begin and end with " 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokenized\+Without\+Comments} & Output of \mbox{\hyperlink{class_tokenizer_a8698b6577a32ae8e9d97b9544312809d}{remove\+Comments}}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_tokenizer_1_1_error}{Error}}} & Thrown when a string constant doesn\textquotesingle{}t end on the same line or doesn\textquotesingle{}t end at all\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+Vector of tokens where string literals are single tokens
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_af97cfd054ffae20c251825095f01fc44}\label{class_tokenizer_af97cfd054ffae20c251825095f01fc44}} 
+\index{Tokenizer@{Tokenizer}!removeWhitespaces@{removeWhitespaces}}
+\index{removeWhitespaces@{removeWhitespaces}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{removeWhitespaces()}{removeWhitespaces()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::remove\+Whitespaces (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$}]{tokenized\+With\+String\+Literals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Removes entries that are whitespaces 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokenized\+With\+String\+Literals} & Vector of tokens that contains spaces, tabs or newlines as tokens\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The tokens that are not whitespaces
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Tokenizer.\+h\item 
+Tokenizer.\+cpp\end{DoxyCompactItemize}

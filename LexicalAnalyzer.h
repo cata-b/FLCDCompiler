@@ -3,22 +3,11 @@
 #include "Token.h"
 #include "SymbolTable.h"
 #include <vector>
-#include <stdexcept>
 #include <regex>
-#include <functional>
 
 class LexicalAnalyzer
 {
 public:
-	class Error : public std::runtime_error
-	{
-	private:
-		Token token_;
-	public:
-		Error(std::string what, Token token) : runtime_error(what), token_{ token } {};
-		Token token() { return token_; }
-	};
-
 	enum class TokenType
 	{
 		KEYWORD,
@@ -28,13 +17,19 @@ public:
 		IDENTIFIER,
 		ERROR
 	};
-
+	/// <summary>
+	/// Analyzes and classifies tokens
+	/// </summary>
+	/// <param name="tokens">Tokens, as returned by <see cref="Tokenizer::tokenize" /></param>
+	/// <param name="symbolTable">Output parameter that will contain all the identifiers and constants from the tokens</param>
+	/// <param name="pif">Output parameter that will contain tokens, their type, and their positions in the symbol table (if a token is not inserted in the symbol table, the position is the <see cref="SymbolTable::end">end</see> of that table)</param>
+	/// <returns>All the tokens that could not be classified</returns>
 	static std::vector<Token> Analyze(std::vector<Token> tokens, SymbolTable& symbolTable, std::vector<std::tuple<Token, TokenType, SymbolTable::Position>>& pif);
 private:
-	static const std::string ALPHABET_REGEX;
+	/// <summary>
+	/// Maps a regular expression to a token type; the order of the elements is such that, if checking in order, tokens that would match more entries will match the correct entry 
+	/// (e.g. true will be classified as a constant, rather than an identifier)
+	/// </summary>
 	static const std::vector<std::pair<std::regex, TokenType>> TOKEN_CLASSES;
-
-	// returns tokens that contain something other than the characters in the alphabet
-	static std::vector<Token> checkAlphabet(std::vector<Token> tokens);
 };
 

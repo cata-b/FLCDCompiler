@@ -33,9 +33,6 @@ private:
 
 	/// <summary> The number of <code>State::OCCUPIED</code> cells </summary>
 	size_t size_;
-
-	/// <summary> The number of cells that are not of state <code>State::EMPTY</code></summary>
-	size_t sizeWithDeleted_;
 	size_t capacity_;
 
 	Hash hash_;
@@ -44,7 +41,7 @@ private:
 	void resize(size_t newCapacity);
 public:
 	/// <summary> Initializes an empty Set with initial capacity 1 </summary>
-	Set() : next_(new int[1]{ -1 }), state_(new State[1]{ State::EMPTY }), data_(new KeyType[1]), firstEmpty_(0), size_(0), sizeWithDeleted_(0), capacity_(1) {}
+	Set() : next_(new int[1]{ -1 }), state_(new State[1]{ State::EMPTY }), data_(new KeyType[1]), firstEmpty_(0), size_(0), capacity_(1) {}
 	
 	/// <summary> Initializes an empty Set with a custom initial capacity </summary>
 	/// <param name="initial_size"> The initial capacity </param>
@@ -71,20 +68,34 @@ public:
 		typedef const KeyType* pointer;
 		typedef const KeyType& reference;
 
-		explicit Iterator(const KeyType* elem, const State* state, const KeyType* end) : current_(elem), currentState_(state), end_(end) {};
+		explicit Iterator(const KeyType* data_begin, const State* state_begin, size_t index, size_t max) : 
+			data_begin_(data_begin), 
+			state_begin_(state_begin),
+			index_(index),
+			max_(max)
+		{};
+
+		Iterator(const Iterator& other);
+		Iterator(Iterator&& other);
 
 		Iterator& operator++();
 		Iterator operator++(int);
+
+		Iterator& operator=(const Iterator& other);
+		Iterator& operator=(Iterator&& other);
 
 		bool operator==(Iterator other) const;
 		bool operator!=(Iterator other) const;
 
 		const reference operator*() const;
 		const pointer operator->() const;
+
+		size_t index() const;
 	private:
-		const KeyType* end_;
-		const KeyType* current_;
-		const State* currentState_;
+		const KeyType* data_begin_;
+		const State* state_begin_;
+		size_t index_;
+		size_t max_;
 	};
 
 	typedef Iterator const_iterator_type;
@@ -116,11 +127,11 @@ public:
 	void erase(Iterator iterator);
 
 	/// <returns>The number of items in the set</returns>
-	size_t size() { return size_; };
+	size_t size() const { return size_; };
 
 	/// <returns>The capacity of the set</returns>
 	/// <remarks>The number of insertions (without subtracting deletions) is compared with the capacity when resizing</remarks>
-	size_t capacity() { return capacity_; };
+	size_t capacity() const { return capacity_; };
 
 	/// <returns>true if the next insert would trigger a resize, therefore invalidating the iterators</returns>
 	bool willInvalidateIteratorsOnInsert() const;
@@ -151,95 +162,69 @@ inline Set<KeyType, Hash, Equals>::Set(size_t initial_size) :
 template<class KeyType, class Hash, class Equals>
 void Set<KeyType, Hash, Equals>::resize(size_t newCapacity)
 {
-	KeyType* newData = new KeyType[newCapacity];
-	State* newState = new State[newCapacity];
-	int* newPointers = new int[newCapacity];
+	KeyType* oldData = data_;
+	State* oldState = state_;
+	size_t oldCapacity = capacity_;
 
-	std::fill_n(newState, newCapacity, State::EMPTY);
-	std::fill_n(newPointers, newCapacity, -1);
-
-	size_t newFirstEmpty = 0;
-
-	for (int i = 0; i < capacity_; ++i)
-	{
-		if (state_[i] != State::OCCUPIED)
-			continue;
-		auto item = data_[i];
-		auto hash = hash_(item);
-		auto pos = hash % newCapacity;
-		if (newState[pos] == State::EMPTY)
-		{
-			newData[pos] = std::move(item);
-			newState[pos] = State::OCCUPIED;
-			if (newFirstEmpty == pos)
-				while (newState[newFirstEmpty] != State::EMPTY)
-					newFirstEmpty = (newFirstEmpty + 1) % newCapacity;
-		}
-		else
-		{
-			while (newPointers[pos] != -1)
-				pos = newPointers[pos];
-			newData[newFirstEmpty] = std::move(item);
-			newState[newFirstEmpty] = State::OCCUPIED;
-			newPointers[pos] = newFirstEmpty;
-			while (newState[newFirstEmpty] != State::EMPTY)
-				newFirstEmpty = (newFirstEmpty + 1) % newCapacity;
-		}
-	}
-
-	delete[] data_;
-	delete[] state_;
+	data_ = new KeyType[newCapacity];
+	state_ = new State[newCapacity];
 	delete[] next_;
-
-	data_ = newData;
-	state_ = newState;
-	next_ = newPointers;
+	next_ = new int[newCapacity];
 	capacity_ = newCapacity;
-	firstEmpty_ = newFirstEmpty;
-	sizeWithDeleted_ = size_;
+	size_ = 0;
+	firstEmpty_ = 0;
+
+	std::fill_n(state_, newCapacity, State::EMPTY);
+	std::fill_n(next_, newCapacity, -1);
+
+	for (int i = 0; i < oldCapacity; ++i)
+		if (oldState[i] == State::OCCUPIED)
+			insert(oldData[i]);
+
+	delete[] oldData;
+	delete[] oldState;
 }
 
 template<class KeyType, class Hash, class Equals>
 template<typename refType>
 inline std::pair<typename Set<KeyType, Hash, Equals>::Iterator, bool> Set<KeyType, Hash, Equals>::insert_(refType item)
 {
-	if (sizeWithDeleted_ >= capacity_)
+	if (firstEmpty_ >= capacity_)
 		resize(capacity_ * 2);
 	size_t hash = hash_(item);
+
 	auto pos = hash % capacity_;
-	if (state_[pos] != State::OCCUPIED)
+	
+	if (state_[pos] == State::EMPTY)
 	{
-		data_[pos] = item;
 		state_[pos] = State::OCCUPIED;
-		if (firstEmpty_ == pos)
-		{
-			if (capacity_ == sizeWithDeleted_ + 1)
-				firstEmpty_ = -1;
-			else
-				while (state_[firstEmpty_] != State::EMPTY)
-					firstEmpty_ = (firstEmpty_ + 1) % capacity_;
-		}
+		data_[pos] = item;
+		next_[pos] = -1;
+		if (pos == firstEmpty_)
+			while (firstEmpty_ < capacity_ && state_[firstEmpty_] != State::EMPTY)
+				++firstEmpty_;
 		++size_;
-		++sizeWithDeleted_;
-		return { Set<KeyType, Hash, Equals>::Iterator(data_ + pos, state_ + pos, data_ + capacity_), true };
+		return { Iterator{data_, state_, pos, capacity_}, true };
 	}
-	while (next_[pos] != -1)
+	
+	auto current = pos;
+	while (next_[current] != -1)
 	{
-		if (state_[pos] == State::OCCUPIED && equals_(data_[pos], item))
-			return { Set<KeyType, Hash, Equals>::Iterator(data_ + pos, state_ + pos, data_ + capacity_), false };
-		pos = next_[pos];
+		if (equals_(data_[current], item))
+			return { Iterator{data_, state_, current, capacity_}, false };
+		current = next_[current];
 	}
-	if (state_[pos] == State::OCCUPIED && equals_(data_[pos], item))
-		return { Set<KeyType, Hash, Equals>::Iterator(data_ + pos, state_ + pos, data_ + capacity_), false };
+	if (equals_(data_[current], item))
+		return { Iterator{data_, state_, current, capacity_}, false };
 	data_[firstEmpty_] = item;
 	state_[firstEmpty_] = State::OCCUPIED;
-	std::pair<Set<KeyType, Hash, Equals>::Iterator, bool> retVal = { Set<KeyType, Hash, Equals>::Iterator(data_ + firstEmpty_, state_ + firstEmpty_, data_ + capacity_), true };
-	if (capacity_ == sizeWithDeleted_ + 1)
-		firstEmpty_ = -1;
-	else
-		while (state_[firstEmpty_] != State::EMPTY)
-			firstEmpty_ = (firstEmpty_ + 1) % capacity_;
-	++sizeWithDeleted_;
+	next_[current] = firstEmpty_;
+	next_[firstEmpty_] = -1;
+
+	auto retVal = std::make_pair(Iterator{data_, state_, (size_t)firstEmpty_, capacity_}, true);
+
+	while (firstEmpty_ < capacity_ && state_[firstEmpty_] != State::EMPTY)
+		++firstEmpty_;
 	++size_;
 	return retVal;
 }
@@ -261,45 +246,44 @@ inline typename Set<KeyType, Hash, Equals>::Iterator Set<KeyType, Hash, Equals>:
 {
 	auto hash = hash_(item);
 	auto pos = hash % capacity_;
-	while (state_[pos] != State::EMPTY && next_[pos] != -1)
-		if (data_[pos] == item)
-			return Iterator(data_ + pos, state_ + pos, data_ + capacity_);
-		else pos = next_[pos];
-	if (data_[pos] == item)
-		return Iterator(data_ + pos, state_ + pos, data_ + capacity_);
+	while (next_[pos] != -1)
+	{
+		if (state_[pos] == State::OCCUPIED && equals_(data_[pos], item))
+			return Iterator{ data_, state_, pos, capacity_ };
+		pos = next_[pos];
+	};
+	if (state_[pos] == State::OCCUPIED && equals_(data_[pos], item))
+		return Iterator{ data_, state_, pos, capacity_ };
 	return end();
 }
 
 template<class KeyType, class Hash, class Equals>
 inline void Set<KeyType, Hash, Equals>::erase(Iterator iterator)
 {
-	if (iterator.current_ < data_ && iterator.current_ >= data_ + capacity_)
+	if (iterator.data_begin_ != data_ || iterator.state_begin_ != state_ || iterator.index_ >= capacity_ || iterator.max_ != capacity_)
 		throw std::runtime_error("Iterator is invalid");
-	auto pos = iterator.current_ - data_;
-	if (pos < firstEmpty_)
-		firstEmpty_ = pos;
-	state_[pos] = State::DELETED;
+	state_[iterator.index_] = State::DELETED;
 	--size_;
 }
 
 template<class KeyType, class Hash, class Equals>
 inline bool Set<KeyType, Hash, Equals>::willInvalidateIteratorsOnInsert() const
 {
-	return sizeWithDeleted_ >= capacity_;
+	return firstEmpty_ >= capacity_;
 }
 
 template<class KeyType, class Hash, class Equals>
 inline typename Set<KeyType, Hash, Equals>::Iterator Set<KeyType, Hash, Equals>::begin() const
 {
 	if (state_[0] != State::OCCUPIED)
-		return ++Iterator(data_, state_, data_ + capacity_);
-	return Iterator(data_, state_, data_ + capacity_);
+		return ++Iterator(data_, state_, 0, capacity_);
+	return Iterator(data_, state_, 0, capacity_);
 }
 
 template<class KeyType, class Hash, class Equals>
 inline typename Set<KeyType, Hash, Equals>::Iterator Set<KeyType, Hash, Equals>::end() const
 {
-	return Iterator(data_ + capacity_, state_ + capacity_, data_ + capacity_);
+	return Iterator(data_, state_, capacity_, capacity_);
 }
 
 #pragma endregion
@@ -308,15 +292,36 @@ inline typename Set<KeyType, Hash, Equals>::Iterator Set<KeyType, Hash, Equals>:
 #pragma region Set Iterator Methods
 
 template<class KeyType, class Hash, class Equals>
+inline Set<KeyType, Hash, Equals>::Iterator::Iterator(const Iterator& other)
+{
+	data_begin_ = other.data_begin_;
+	state_begin_ = other.state_begin_;
+	index_ = other.index_;
+	max_ = other.max_;
+}
+
+template<class KeyType, class Hash, class Equals>
+inline Set<KeyType, Hash, Equals>::Iterator::Iterator(Iterator&& other)
+{
+	data_begin_ = other.data_begin_;
+	state_begin_ = other.state_begin_;
+	index_ = other.index_;
+	max_ = other.max_;
+	other.index_ = max_;
+}
+
+template<class KeyType, class Hash, class Equals>
 inline typename Set<KeyType, Hash, Equals>::Iterator& Set<KeyType, Hash, Equals>::Iterator::operator++()
 {
-	if (current_ >= end_)
+	if (index_ >= max_)
+	{
+		index_ = max_;
 		throw std::runtime_error("Reached the end of the container");
+	}
 	do
 	{
-		++current_;
-		++currentState_;
-	} while (current_ < end_ && *currentState_ != State::OCCUPIED);
+		++index_;
+	} while (index_ < max_ && state_begin_[index_] != State::OCCUPIED);
 
 	return *this;
 }
@@ -330,9 +335,34 @@ inline typename Set<KeyType, Hash, Equals>::Iterator Set<KeyType, Hash, Equals>:
 }
 
 template<class KeyType, class Hash, class Equals>
+inline typename Set<KeyType, Hash, Equals>::Iterator& Set<KeyType, Hash, Equals>::Iterator::operator=(const Iterator& other)
+{
+	data_begin_ = other.data_begin_;
+	state_begin_ = other.state_begin_;
+	index_ = other.index_;
+	max_ = other.max_;
+	return *this;
+}
+
+template<class KeyType, class Hash, class Equals>
+inline typename Set<KeyType, Hash, Equals>::Iterator& Set<KeyType, Hash, Equals>::Iterator::operator=(Iterator&& other)
+{
+	data_begin_ = other.data_begin_;
+	state_begin_ = other.state_begin_;
+	index_ = other.index_;
+	max_ = other.max_;
+	other.index_ = max_; // turn other into end()
+	return *this;
+}
+
+template<class KeyType, class Hash, class Equals>
 inline bool Set<KeyType, Hash, Equals>::Iterator::operator==(Iterator other) const
 {
-	return current_ == other.current_ && end_ == other.end_;
+	return 
+		data_begin_ == other.data_begin_ &&
+		state_begin_ == other.state_begin_ &&
+		index_ == other.index_ &&
+		max_ == other.max_;
 }
 
 template<class KeyType, class Hash, class Equals>
@@ -344,13 +374,19 @@ inline bool Set<KeyType, Hash, Equals>::Iterator::operator!=(Iterator other) con
 template<class KeyType, class Hash, class Equals>
 inline const Set<KeyType, Hash, Equals>::Iterator::reference Set<KeyType, Hash, Equals>::Iterator::operator*() const
 {
-	return *current_;
+	return data_begin_[index_];
 }
 
 template<class KeyType, class Hash, class Equals>
 inline const Set<KeyType, Hash, Equals>::Iterator::pointer Set<KeyType, Hash, Equals>::Iterator::operator->() const
 {
-	return current_;
+	return data_begin_ + index_;
+}
+
+template<class KeyType, class Hash, class Equals>
+inline size_t Set<KeyType, Hash, Equals>::Iterator::index() const
+{
+	return index_;
 }
 
 #pragma endregion

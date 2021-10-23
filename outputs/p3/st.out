@@ -1,0 +1,31 @@
+0 "NIM | Try to beat me!\n"
+1 heaps
+2 "Heaps: "
+3 heapCount
+4 i
+5 maxHeapSize
+6 "Max. heap size: "
+7 "My turn!\n"
+8 0
+9 choice
+10 "I take "
+11 " from "
+12 "Your turn!\n"
+13 id
+14 "Number of heaps: "
+15 ": "
+16 "Heap id: "
+17 xorSum
+18 "Heap "
+19 " Does not exist. You have lost your turn :)\n"
+20 count
+21 " Does not contain that many stones. You have lost your turn :)\n"
+22 "I choose to skip my turn :(\n"
+23 "\n"
+24 false
+25 "Win!\n"
+26 turn
+27 "How much to take from the heap: "
+28 1
+29 total
+31 cid

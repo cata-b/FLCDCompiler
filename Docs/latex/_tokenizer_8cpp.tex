@@ -1,0 +1,74 @@
+\hypertarget{_tokenizer_8cpp}{}\doxysubsection{D\+:/\+M\+E\+G\+A/\+Facultate/\+Sem. V/\+Formal Languages and Compiler Design/\+Labs/\+F\+L\+C\+D\+Compiler/\+Tokenizer.cpp File Reference}
+\label{_tokenizer_8cpp}\index{D:/MEGA/Facultate/Sem. V/Formal Languages and Compiler Design/Labs/FLCDCompiler/Tokenizer.cpp@{D:/MEGA/Facultate/Sem. V/Formal Languages and Compiler Design/Labs/FLCDCompiler/Tokenizer.cpp}}
+{\ttfamily \#include \char`\"{}Tokenizer.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_tokenizer_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}~(1 $<$$<$ 7) -\/ 1
+\item 
+\#define \mbox{\hyperlink{_tokenizer_8cpp_abfa0d183e035eb9705b5faec98294d0f}{W\+H\+I\+T\+E\+S\+P\+A\+CE}}~\char`\"{}\textbackslash{}t\textbackslash{}n \char`\"{}
+\item 
+\#define \mbox{\hyperlink{_tokenizer_8cpp_a557b042aa353cdf74324fa04c52888b1}{S\+E\+P\+A\+R\+A\+T\+O\+RS}}~\char`\"{}\mbox{[}$\,$\mbox{]}\{\}()\+:;,+-\/$\ast$/\%$^\wedge$$\vert$\&!\textbackslash{}\textbackslash{}\textbackslash{}\char`\"{}\textbackslash{}t\textbackslash{}n \char`\"{}
+\item 
+\#define \mbox{\hyperlink{_tokenizer_8cpp_a060915224ed824292d5dea741a16adfe}{W\+I\+D\+E\+\_\+\+S\+E\+P\+A\+R\+A\+T\+O\+R\+\_\+\+A\+T\+O\+MS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{_tokenizer_8cpp_aeb9d8b72cd3a4229dbc029ee63711381}{count\+Occurrences}} (const char $\ast$str, char ch)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_tokenizer_8cpp_a6b20d41d6252e9871430c242cb1a56e7}\label{_tokenizer_8cpp_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{Tokenizer.cpp@{Tokenizer.cpp}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!Tokenizer.cpp@{Tokenizer.cpp}}
+\doxyparagraph{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~(1 $<$$<$ 7) -\/ 1}
+
+\mbox{\Hypertarget{_tokenizer_8cpp_a557b042aa353cdf74324fa04c52888b1}\label{_tokenizer_8cpp_a557b042aa353cdf74324fa04c52888b1}} 
+\index{Tokenizer.cpp@{Tokenizer.cpp}!SEPARATORS@{SEPARATORS}}
+\index{SEPARATORS@{SEPARATORS}!Tokenizer.cpp@{Tokenizer.cpp}}
+\doxyparagraph{\texorpdfstring{SEPARATORS}{SEPARATORS}}
+{\footnotesize\ttfamily \#define S\+E\+P\+A\+R\+A\+T\+O\+RS~\char`\"{}\mbox{[}$\,$\mbox{]}\{\}()\+:;,+-\/$\ast$/\%$^\wedge$$\vert$\&!\textbackslash{}\textbackslash{}\textbackslash{}\char`\"{}\textbackslash{}t\textbackslash{}n \char`\"{}}
+
+\mbox{\Hypertarget{_tokenizer_8cpp_abfa0d183e035eb9705b5faec98294d0f}\label{_tokenizer_8cpp_abfa0d183e035eb9705b5faec98294d0f}} 
+\index{Tokenizer.cpp@{Tokenizer.cpp}!WHITESPACE@{WHITESPACE}}
+\index{WHITESPACE@{WHITESPACE}!Tokenizer.cpp@{Tokenizer.cpp}}
+\doxyparagraph{\texorpdfstring{WHITESPACE}{WHITESPACE}}
+{\footnotesize\ttfamily \#define W\+H\+I\+T\+E\+S\+P\+A\+CE~\char`\"{}\textbackslash{}t\textbackslash{}n \char`\"{}}
+
+\mbox{\Hypertarget{_tokenizer_8cpp_a060915224ed824292d5dea741a16adfe}\label{_tokenizer_8cpp_a060915224ed824292d5dea741a16adfe}} 
+\index{Tokenizer.cpp@{Tokenizer.cpp}!WIDE\_SEPARATOR\_ATOMS@{WIDE\_SEPARATOR\_ATOMS}}
+\index{WIDE\_SEPARATOR\_ATOMS@{WIDE\_SEPARATOR\_ATOMS}!Tokenizer.cpp@{Tokenizer.cpp}}
+\doxyparagraph{\texorpdfstring{WIDE\_SEPARATOR\_ATOMS}{WIDE\_SEPARATOR\_ATOMS}}
+{\footnotesize\ttfamily \#define W\+I\+D\+E\+\_\+\+S\+E\+P\+A\+R\+A\+T\+O\+R\+\_\+\+A\+T\+O\+MS}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\textcolor{charliteral}{'/'}, \{ \textcolor{charliteral}{'/'} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'|'}, \{ \textcolor{charliteral}{'|'} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'\&'}, \{ \textcolor{charliteral}{'\&'} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'='}, \{ \textcolor{charliteral}{'='} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'!'}, \{ \textcolor{charliteral}{'='} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'<'}, \{ \textcolor{charliteral}{'='} \}\}, \(\backslash\)}
+\DoxyCodeLine{    \{\textcolor{charliteral}{'>'}, \{ \textcolor{charliteral}{'='} \}\}}
+
+\end{DoxyCode}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{_tokenizer_8cpp_aeb9d8b72cd3a4229dbc029ee63711381}\label{_tokenizer_8cpp_aeb9d8b72cd3a4229dbc029ee63711381}} 
+\index{Tokenizer.cpp@{Tokenizer.cpp}!countOccurrences@{countOccurrences}}
+\index{countOccurrences@{countOccurrences}!Tokenizer.cpp@{Tokenizer.cpp}}
+\doxyparagraph{\texorpdfstring{countOccurrences()}{countOccurrences()}}
+{\footnotesize\ttfamily size\+\_\+t count\+Occurrences (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{char}]{ch }\end{DoxyParamCaption})}
+

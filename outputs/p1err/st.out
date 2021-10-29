@@ -1,14 +1,17 @@
 0 "n (> 0) = "
-1 n
+1 "Second value: "
 2 "Fibonacci sequence with parameters: \n"
-3 "n should be > 0"
-4 y
-5 1
-6 "Result: "
+3 0
+4 "Result: "
+5 "\n"
 7 x
 8 "First value: "
-9 2
-10 "\n"
-12 "Second value: "
+11 -1
 13 z
-15 0
+15 "n should be > 0"
+17 n
+20 y
+21 2
+22 7
+23 -5
+28 1

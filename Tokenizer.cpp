@@ -46,7 +46,9 @@ vector<Token> Tokenizer::tokenize(string filename)
 	result =
 		removeWhitespaces(
 			combineStringLiterals(
-				removeComments(result)
+				combineIntConstants(
+					removeComments(result)
+				)
 			)
 		);
 	return result;
@@ -213,6 +215,46 @@ vector<Token> Tokenizer::removeComments(vector<Token> tokenized)
 			result.push_back(entry);
 	}
 
+	return result;
+}
+
+std::vector<Token> Tokenizer::combineIntConstants(std::vector<Token> tokenized)
+{
+	static const auto digits_pattern = regex(R"([0-9]+)");
+	static const auto sign_pattern = regex(R"(\+|\-)");
+	static const auto sep_pattern = regex(R"(==|!=|>=|<=|\|\||&&|\+|-|\*|\/|%|=|<|>|\^|\||&|!|\(|\)|\{|\}|\[|\]|,|'|:|;)");
+	vector<Token> result;
+	result.reserve(tokenized.size());
+	result.push_back(tokenized[0]);
+	for (size_t i = 1; i < tokenized.size(); ++i)
+	{
+		auto& current = tokenized[i];
+		if (regex_match(current.content, digits_pattern))
+		{
+			auto& prev = tokenized[i - 1];
+			if (regex_match(prev.content, sign_pattern))
+			{
+				bool should_combine = true;
+				for (int j = i - 2; j >= 0; --j)
+				{
+					auto& entry = tokenized[j];
+					if (!std::all_of(entry.content.begin(), entry.content.end(), [](char c) {return std::isspace(static_cast<unsigned char>(c)); }))
+					{
+						if (!regex_match(entry.content, sep_pattern))
+							should_combine = false;
+						break;
+					}
+				}
+				if (should_combine)
+				{
+					result.pop_back();
+					result.push_back(Token{ prev.content + current.content, prev.line });
+					continue;
+				}
+			}
+		}
+		result.push_back(current);
+	}
 	return result;
 }
 

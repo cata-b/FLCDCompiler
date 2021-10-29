@@ -9,7 +9,7 @@ class \mbox{\hyperlink{class_tokenizer_1_1_error}{Error}}
 \begin{DoxyCompactItemize}
 \item 
 static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_af782f408c94bbb150c2721430e1997bc}{tokenize}} (std\+::string filename)
-\begin{DoxyCompactList}\small\item\em Reads input from a file and splits it into tokens \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Reads input from a file and splits it into tokens. Splitting is performed in multiple steps\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,6 +20,8 @@ static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperl
 static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a8698b6577a32ae8e9d97b9544312809d}{remove\+Comments}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+With\+Split\+Separators)
 \begin{DoxyCompactList}\small\item\em Removes sequences of tokens that begin with \textquotesingle{}//\textquotesingle{} and end with \textquotesingle{}~\newline
 \textquotesingle{} \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_ae2eef42d9a61597eb8dc4a4cdfd2fd85}{combine\+Int\+Constants}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized)
+\begin{DoxyCompactList}\small\item\em Combines sequences where there is a sign(+/-\/) and a number, and before the sequence there are no identifiers/constants \end{DoxyCompactList}\item 
 static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_a48073508160e45a6dc66b03616c2a968}{combine\+String\+Literals}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+Without\+Comments)
 \begin{DoxyCompactList}\small\item\em Combines token sequences that are on a single line and begin and end with " \end{DoxyCompactList}\item 
 static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperlink{class_tokenizer_af97cfd054ffae20c251825095f01fc44}{remove\+Whitespaces}} (std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ tokenized\+With\+String\+Literals)
@@ -35,7 +37,17 @@ static std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ \mbox{\hyperl
 
 
 
-Reads input from a file and splits it into tokens 
+Reads input from a file and splits it into tokens. Splitting is performed in multiple steps\+: 
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{class_tokenizer_a12548bb1002907630f727828baf2cf05}{split\+Tokens\+From\+Separators}} reads a file and splits it into strings based on separators (e.\+g. if and \char`\"{}); are separate tokens);$<$/li$>$
+$<$li$>$$<$see cref=\char`\"{}split\+Separators\char`\"{} /$>$ splits the separator-\/only strings, but takes into account operators such as +=;$<$/li$>$
+$<$li$>$$<$see cref=\char`\"{}remove\+Comments\char`\"{} /$>$ removes single-\/line comments;$<$/li$>$
+$<$li$>$$<$see cref=\char`\"{}combine\+Int\+Constants\char`\"{} /$>$ combines integers with a previous sign;$<$/li$>$
+$<$li$>$$<$see cref=\char`\"{}combine\+String\+Literals\char`\"{} /$>$ combines string constants;$<$/li$>$
+$<$li$>$$<$see cref=\char`\"{}remove\+Whitespaces" /$>$ removes whitespaces that are outside of constants 
+\end{DoxyItemize}
 
 
 \begin{DoxyParams}{Parameters}
@@ -96,6 +108,24 @@ Tokens where all separators are a separate token (taking into account 2-\/charac
 
 Removes sequences of tokens that begin with \textquotesingle{}//\textquotesingle{} and end with \textquotesingle{}~\newline
 \textquotesingle{} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokenized\+With\+Split\+Separators} & Output of \mbox{\hyperlink{class_tokenizer_a56ebbc02c2916516b0a72945516fc281}{split\+Separators}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The modified tokens
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tokenizer_ae2eef42d9a61597eb8dc4a4cdfd2fd85}\label{class_tokenizer_ae2eef42d9a61597eb8dc4a4cdfd2fd85}} 
+\index{Tokenizer@{Tokenizer}!combineIntConstants@{combineIntConstants}}
+\index{combineIntConstants@{combineIntConstants}!Tokenizer@{Tokenizer}}
+\doxyparagraph{\texorpdfstring{combineIntConstants()}{combineIntConstants()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$ Tokenizer\+::combine\+Int\+Constants (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_token}{Token}} $>$}]{tokenized }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Combines sequences where there is a sign(+/-\/) and a number, and before the sequence there are no identifiers/constants 
 
 
 \begin{DoxyParams}{Parameters}

@@ -21,7 +21,16 @@ public:
 	};
 
 	/// <summary>
-	/// Reads input from a file and splits it into tokens
+	/// Reads input from a file and splits it into tokens.
+	/// Splitting is performed in multiple steps:
+	/// <ul>
+	/// <li><see cref="splitTokensFromSeparators" /> reads a file and splits it into strings based on separators (e.g. if and "); are separate tokens);</li>
+	/// <li><see cref="splitSeparators" /> splits the separator-only strings, but takes into account operators such as +=;</li>
+	/// <li><see cref="removeComments" /> removes single-line comments;</li>
+	/// <li><see cref="combineIntConstants" /> combines integers with a previous sign;</li>
+	/// <li><see cref="combineStringLiterals" /> combines string constants;</li>
+	/// <li><see cref="removeWhitespaces" /> removes whitespaces that are outside of constants</li>
+	/// </ul>
 	/// </summary>
 	/// <param name="filename">The name of the file to read</param>
 	/// <exception cref="Error">Thrown when the tokenizer cannot read a file or cannot split the content into tokens correctly</exception>
@@ -50,6 +59,13 @@ private:
 	/// <param name="tokenizedWithSplitSeparators">Output of <see cref="splitSeparators"/></param>
 	/// <returns>The modified tokens</returns>
 	static std::vector<Token> removeComments(std::vector<Token> tokenizedWithSplitSeparators);
+	
+	/// <summary>
+	/// Combines sequences where there is a sign(+/-) and a number, and before the sequence there are no identifiers/constants
+	/// </summary>
+	/// <param name="tokenizedWithSplitSeparators">Output of <see cref="splitSeparators"/></param>
+	/// <returns>The modified tokens</returns>
+	static std::vector<Token> combineIntConstants(std::vector<Token> tokenized);
 
 	/// <summary>
 	/// Combines token sequences that are on a single line and begin and end with "

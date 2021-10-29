@@ -7,6 +7,8 @@
 
   \item {capacity}
     \subitem {Set$<$ KeyType, Hash, Equals $>$}, \hyperpage{6}
+  \item {combineIntConstants}
+    \subitem {Tokenizer}, \hyperpage{13}
   \item {combineStringLiterals}
     \subitem {Tokenizer}, \hyperpage{13}
 
@@ -43,9 +45,9 @@
   \indexspace
 
   \item {removeComments}
-    \subitem {Tokenizer}, \hyperpage{12}
-  \item {removeWhitespaces}
     \subitem {Tokenizer}, \hyperpage{13}
+  \item {removeWhitespaces}
+    \subitem {Tokenizer}, \hyperpage{14}
 
   \indexspace
 
@@ -79,14 +81,15 @@
   \item {TOKEN\_CLASSES}
     \subitem {LexicalAnalyzer}, \hyperpage{2}
   \item {tokenize}
-    \subitem {Tokenizer}, \hyperpage{11}
+    \subitem {Tokenizer}, \hyperpage{12}
   \item {Tokenizer}, \hyperpage{11}
+    \subitem {combineIntConstants}, \hyperpage{13}
     \subitem {combineStringLiterals}, \hyperpage{13}
-    \subitem {removeComments}, \hyperpage{12}
-    \subitem {removeWhitespaces}, \hyperpage{13}
+    \subitem {removeComments}, \hyperpage{13}
+    \subitem {removeWhitespaces}, \hyperpage{14}
     \subitem {splitSeparators}, \hyperpage{12}
     \subitem {splitTokensFromSeparators}, \hyperpage{12}
-    \subitem {tokenize}, \hyperpage{11}
+    \subitem {tokenize}, \hyperpage{12}
   \item {Tokenizer::Error}, \hyperpage{14}
 
 \end{theindex}

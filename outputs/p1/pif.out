@@ -55,8 +55,7 @@ CONSTANT   3
 ;          -1
 exit       -1
 (          -1
--          -1
-CONSTANT   5
+CONSTANT   11
 )          -1
 ;          -1
 }          -1

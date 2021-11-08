@@ -1,0 +1,3 @@
+[submodule "FLCDFiniteAutomaton"]
+	path = FLCDFiniteAutomaton
+	url = https://github.com/cata-b/FLCDFiniteAutomaton

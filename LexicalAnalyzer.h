@@ -27,9 +27,9 @@ public:
 	static std::vector<Token> Analyze(std::vector<Token> tokens, SymbolTable& symbolTable, std::vector<std::tuple<Token, TokenType, SymbolTable::Position>>& pif);
 private:
 	/// <summary>
-	/// Maps a regular expression to a token type; the order of the elements is such that, if checking in order, tokens that would match more entries will match the correct entry 
+	/// Maps a boolean expression to a token type; the order of the elements is such that, if checking in order, tokens that would match more entries will match the correct entry 
 	/// (e.g. true will be classified as a constant, rather than an identifier)
 	/// </summary>
-	static const std::vector<std::pair<std::regex, TokenType>> TOKEN_CLASSES;
+	static const std::vector<std::pair<std::function<bool(std::string)>, TokenType>> TOKEN_CLASSES;
 };
 

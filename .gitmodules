@@ -1,3 +1,6 @@
 [submodule "FLCDFiniteAutomaton"]
 	path = FLCDFiniteAutomaton
 	url = https://github.com/cata-b/FLCDFiniteAutomaton
+[submodule "FLCD-Symbol-Table"]
+	path = FLCD-Symbol-Table
+	url = https://github.com/cata-b/FLCD-Symbol-Table

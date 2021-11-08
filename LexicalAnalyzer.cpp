@@ -1,8 +1,8 @@
 #include "LexicalAnalyzer.h"
 #include <regex>
 #include <algorithm>
-#include "FLCDFiniteAutomaton/FA.hpp"
-#include "FLCDFiniteAutomaton/CharFAReader.hpp"
+#include "FA.hpp"
+#include "CharFAReader.h"
 
 using namespace std;
 
